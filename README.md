@@ -1,10 +1,11 @@
+# Zmonitor
+
 Struktura projektu:
 
 Program składa się z 3 głównych plików:
-
-zmonitor2.cpp - głównego pliku z kodem, który jest opisem działania monitora, nie wymaga żadnej interakcji z programistom chcącym z niego korzystać.
-zmonitor.hpp - plik nagłówkowy, który należy dołączyć gdy chcemy korzystać z monitora w naszym projekcie.
-config.hpp -  plik nagłówkowy zawierający zmienną określającą ilość monitorów oraz trzy zmienne tablicowe: clients - opisujący adresy pod którymi znajdują się monitory, serwers opisujący na jakich portach/adresach mają zostać wystartowane monitory oraz priorities umożliwiające wskazanie, które monitory mają zachowywać się w sposób uprzywilejowany (tzn. gdy 2 będą się ubiegać w tym samym czasie priorytet zdecyduje który uzyska strefę krytyczną jako pierwszy).
+* zmonitor2.cpp - głównego pliku z kodem, który jest opisem działania monitora, nie wymaga żadnej interakcji z programistom chcącym z niego korzystać.
+* zmonitor.hpp - plik nagłówkowy, który należy dołączyć gdy chcemy korzystać z monitora w naszym projekcie.
+* config.hpp -  plik nagłówkowy zawierający zmienną określającą ilość monitorów oraz trzy zmienne tablicowe: clients - opisujący adresy pod którymi znajdują się monitory, serwers opisujący na jakich portach/adresach mają zostać wystartowane monitory oraz priorities umożliwiające wskazanie, które monitory mają zachowywać się w sposób uprzywilejowany (tzn. gdy 2 będą się ubiegać w tym samym czasie priorytet zdecyduje który uzyska strefę krytyczną jako pierwszy).
 
 Użycie:
 Programy należy skompilować w następujący sposób:
@@ -15,6 +16,7 @@ I uruchamiając go z id, które określa który jest to węzeł wedle zapisanych
 ./mon [id]
 
 Samo użycie monitora pokazane jest w pliku straznik.cpp, który pobiera bufor z sekcji krytycznej, następnie modyfikuje go i odsyła do monitora. Aby to umożliwić dostępne są 2 funkcje z pliku nagłówkowego zmonitor.hpp:
+
 acquireCS(id) - wysyła żądanie zajęcia sekcji krytycznej do lokalnego monitora, który następnie komunikuje się z pozostałymi monitorami rozproszonymi i po zajęciu zwraca bufor (w postaci stringa, kwestia zapisu pozostałych typów zmiennych pozostaje w gestii programisty, co można uzyskać za pomocą serializacji).
 po zakończeniu pracy z sekcją krytyczną należy użyć funkcji release_CS(id,data) - podając jako parametr data zmodyfikowany bufor.
 
